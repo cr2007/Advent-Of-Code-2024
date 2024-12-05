@@ -12,6 +12,7 @@ public class Day1_Part2 {
         List<Integer> leftList = new ArrayList<>();
         List<Integer> rightList = new ArrayList<>();
         List<Integer> similarityScore = new ArrayList<>();
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
 
         String filePath = Objects.requireNonNull(
                 Day1_Part2.class.getResource("/Day1_input.txt")
@@ -25,8 +26,8 @@ public class Day1_Part2 {
                 String[] parts = line.split("\\s+");
 
                 if (parts.length == 2) {
-                    leftList.add(Integer.parseInt(parts[0].trim()));
-                    rightList.add(Integer.parseInt(parts[1].trim()));
+                    leftList.add( Integer.parseInt( parts[0].trim() ) );
+                    rightList.add( Integer.parseInt( parts[1].trim() ) );
                 } else System.out.println("Skipping invalid line: " + line);
             }
         } catch (IOException e) {
@@ -36,17 +37,13 @@ public class Day1_Part2 {
         Collections.sort(leftList);
         Collections.sort(rightList);
 
-
-        Map<Integer, Integer> frequencyMap = new HashMap<>();
-
         for (int value : rightList) frequencyMap.put(
                 value, frequencyMap.getOrDefault(value, 0) + 1
         );
 
-        for (int value : leftList) {
-            int frequency = frequencyMap.getOrDefault(value, 0);
-            similarityScore.add(value * frequency);
-        }
+        for (int value : leftList) similarityScore.add(
+                value * frequencyMap.getOrDefault(value, 0)
+        );
 
         int totalSimilarityScore = similarityScore.stream().mapToInt(Integer::intValue).sum();
 
