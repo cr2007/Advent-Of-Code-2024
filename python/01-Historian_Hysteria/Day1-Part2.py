@@ -1,5 +1,5 @@
 # Advent of Code 2024
-# Solution - Day 1 Part 2 - Historian Hysteria
+# Solution - Day 1, Part 2 - Historian Hysteria
 # Author: CSK
 
 import timeit
